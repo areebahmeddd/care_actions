@@ -160,13 +160,15 @@ jobs:
           if [ "$PASSED" = "true" ]; then
             HEADER="Great work! All checks passed. Your facility meets all the requirements."
             STATUS="success"
+            FOOTER=""
           else
             HEADER="Uh oh! It looks like you've missed some parts of the assignment. Here are the results of the tests that we ran. A tick (✓) indicates a successful test, and a cross (✗) indicates a failed test."
             STATUS="failure"
+            FOOTER=$'\n\nPlease make sure that you go through the assignment instructions and verify your facility settings in CARE. If you\'re having trouble with this assignment, refer to the course materials and provided guidelines.'
           fi
 
-          FEEDBACK=$(printf "%s\n\n%s Name should match the pattern \"<Your Name>'s PHC\" (with an optional trailing number, e.g. \"Yaswanth's PHC 2\")\n\n%s Facility Type should be \"Primary Health Centres\"\n\n%s Address should not be empty\n\n%s Pincode should be a valid 6-digit Indian pincode\n\n%s Phone Number should be a valid Indian mobile number starting with 7 (e.g. +917XXXXXXXXX)\n\n%s Facility should be created under the \"Fort Kochi\" ward (Kerala → Ernakulam → Kochi Corporation → Fort Kochi)\n\n%s At least 2 features should be selected\n\n%s Facility should be private (Public Facility unchecked)\n\n%s Facility should be created by you (using the credentials assigned to you)\n\nPlease make sure that you go through the assignment instructions and verify your facility settings in CARE. If you're having trouble with this assignment, refer to the course materials and provided guidelines." \
-            "$HEADER" "$T1" "$T2" "$T3" "$T4" "$T5" "$T6" "$T7" "$T8" "$T9")
+          FEEDBACK=$(printf "%s\n\n%s Name should match the pattern \"<Your Name>'s PHC\" (with an optional trailing number, e.g. \"Yaswanth's PHC 2\")\n\n%s Facility Type should be \"Primary Health Centres\"\n\n%s Address should not be empty\n\n%s Pincode should be a valid 6-digit Indian pincode\n\n%s Phone Number should be a valid Indian mobile number starting with 7 (e.g. +917XXXXXXXXX)\n\n%s Facility should be created under the \"Fort Kochi\" ward (Kerala → Ernakulam → Kochi Corporation → Fort Kochi)\n\n%s At least 2 features should be selected\n\n%s Facility should be private (Public Facility unchecked)\n\n%s Facility should be created by you (using the credentials assigned to you)%s" \
+            "$HEADER" "$T1" "$T2" "$T3" "$T4" "$T5" "$T6" "$T7" "$T8" "$T9" "$FOOTER")
 
           jq -n \
             --arg status "$STATUS" \

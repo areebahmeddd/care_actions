@@ -211,13 +211,15 @@ jobs:
           if [ "$PASSED" = "true" ]; then
             HEADER="Great work! All checks passed. Your beds meet all the requirements."
             STATUS="success"
+            FOOTER=""
           else
             HEADER="Uh oh! It looks like you've missed some parts of the assignment. Here are the results of the tests that we ran. A tick (✓) indicates a successful test, and a cross (✗) indicates a failed test."
             STATUS="failure"
+            FOOTER=$'\n\nPlease make sure that you go through the assignment instructions and verify your bed settings in CARE. If you\'re having trouble with this assignment, refer to the course materials and provided guidelines.'
           fi
 
-          FEEDBACK=$(printf "%s\n\n%s Exactly 4 beds should be created in the room location (found: %s)\n\n%s All beds should have Status \"Active\"\n\n%s All beds should have Operational Status \"Unoccupied\"\n\n%s All beds should have a description\n\n%s A bed named exactly \"Bed 1\" should exist\n\n%s A bed named exactly \"Bed 2\" should exist\n\n%s A bed named exactly \"Bed 3\" should exist\n\n%s A bed named exactly \"Full Electric Bed\" should exist\n\nPlease make sure that you go through the assignment instructions and verify your bed settings in CARE. If you're having trouble with this assignment, refer to the course materials and provided guidelines." \
-            "$HEADER" "$T1" "$BED_COUNT" "$T2" "$T3" "$T4" "$T5" "$T6" "$T7" "$T8")
+          FEEDBACK=$(printf "%s\n\n%s Exactly 4 beds should be created in the room location (found: %s)\n\n%s All beds should have Status \"Active\"\n\n%s All beds should have Operational Status \"Unoccupied\"\n\n%s All beds should have a description\n\n%s A bed named exactly \"Bed 1\" should exist\n\n%s A bed named exactly \"Bed 2\" should exist\n\n%s A bed named exactly \"Bed 3\" should exist\n\n%s A bed named exactly \"Full Electric Bed\" should exist%s" \
+            "$HEADER" "$T1" "$BED_COUNT" "$T2" "$T3" "$T4" "$T5" "$T6" "$T7" "$T8" "$FOOTER")
 
           jq -n \
             --arg status "$STATUS" \

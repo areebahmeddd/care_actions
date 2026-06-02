@@ -192,13 +192,15 @@ jobs:
           if [ "$PASSED" = "true" ]; then
             HEADER="Great work! All checks passed. Your department meets all the requirements."
             STATUS="success"
+            FOOTER=""
           else
             HEADER="Uh oh! It looks like you've missed some parts of the assignment. Here are the results of the tests that we ran. A tick (✓) indicates a successful test, and a cross (✗) indicates a failed test."
             STATUS="failure"
+            FOOTER=$'\n\nPlease make sure that you go through the assignment instructions and verify your department settings in CARE. If you\'re having trouble with this assignment, refer to the course materials and provided guidelines.'
           fi
 
-          FEEDBACK=$(printf "%s\n\n%s Department name should be one of: %s (exact match, case-sensitive)\n\n%s Department type should be \"Department\"\n\n%s Department should be one you created (not the auto-generated \"Administration\" department)\n\n%s Department should be created by you (using the credentials assigned to you)\n\nPlease make sure that you go through the assignment instructions and verify your department settings in CARE. If you're having trouble with this assignment, refer to the course materials and provided guidelines." \
-            "$HEADER" "$T1" "$ALLOWED_HUMAN" "$T2" "$T3" "$T4")
+          FEEDBACK=$(printf "%s\n\n%s Department name should be one of: %s (exact match, case-sensitive)\n\n%s Department type should be \"Department\"\n\n%s Department should be one you created (not the auto-generated \"Administration\" department)\n\n%s Department should be created by you (using the credentials assigned to you)%s" \
+            "$HEADER" "$T1" "$ALLOWED_HUMAN" "$T2" "$T3" "$T4" "$FOOTER")
 
           jq -n \
             --arg status "$STATUS" \
